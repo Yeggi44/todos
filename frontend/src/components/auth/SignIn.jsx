@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 
 const SignIn = () => {
   const classes = useStyles();
-  const auth= useSelector((state) => state.auth);
+  const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [creds, setCreds] = useState({
     email: "",
@@ -44,11 +44,11 @@ const SignIn = () => {
         className={classes.formStyle}
         onSubmit={handleSubmit}
       >
-        <Typography variant="h5">signIn;</Typography>
+        <Typography variant="h5">Sign In</Typography>
         <TextField
           className={classes.spacing}
           id="enter-email"
-          label="enterEmail"
+          label="Enter Email"
           variant="outlined"
           fullWidth
           value={creds.email}
@@ -58,7 +58,7 @@ const SignIn = () => {
           className={classes.spacing}
           id="enter-password"
           type="password"
-          label="enterPassword"
+          label="Enter Password"
           variant="outlined"
           fullWidth
           value={creds.password}

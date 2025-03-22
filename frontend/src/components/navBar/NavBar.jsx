@@ -44,7 +44,7 @@ const NavBar = () => {
           <Toolbar>
             <Typography variant="h4" className={classes.title}>
               <Link className={classes.linkStyle} to="/">
-                toDoApp;
+                ToDo App
               </Link>
             </Typography>
             {user._id ? (

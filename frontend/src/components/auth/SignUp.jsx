@@ -45,11 +45,11 @@ const SignUp = () => {
         className={classes.formStyle}
         onSubmit={handleSubmit}
       >
-        <Typography variant="h5">signUp;</Typography>
+        <Typography variant="h5">Sign Up</Typography>
         <TextField
           className={classes.spacing}
           id="enter-name"
-          label="enterName"
+          label="Enter Name"
           variant="outlined"
           fullWidth
           value={user.name}
@@ -58,7 +58,7 @@ const SignUp = () => {
         <TextField
           className={classes.spacing}
           id="enter-email"
-          label="enterEmail"
+          label="Enter Email"
           variant="outlined"
           fullWidth
           value={user.email}
@@ -68,7 +68,7 @@ const SignUp = () => {
           className={classes.spacing}
           id="enter-password"
           type="password"
-          label="enterPassword"
+          label="Enter Password"
           variant="outlined"
           fullWidth
           value={user.password}
