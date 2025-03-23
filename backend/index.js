@@ -8,9 +8,7 @@ const { connectLocalDB } = require("./config/db.config");
 const app = express();
 app.use(
   cors({
-    origin: ["https://todoapp-os6a.vercel.app"],
-    methods: ["POST", "GET", "PUT"],
-    credentials: true,
+    origin: '*'
   })
 );
 app.use(express.json());
