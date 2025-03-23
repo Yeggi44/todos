@@ -35,7 +35,7 @@ const ListTodos = ({ todo, setTodo }) => {
       <div className={classes.todosStyle}>
         <Typography variant="h5">
           {" "}
-          {todos.length > 0 ? "theTodos;" : "noTodosYet;"}{" "}
+          {todos.length > 0 ? "Todos" : "No Todos Yet"}{" "}
         </Typography>
         {todos &&
           todos.map((todo) => {
