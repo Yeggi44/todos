@@ -52,19 +52,29 @@ const SignIn = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCreds((prevCreds) => ({ ...prevCreds, [name]: value }));
-    validateField(name, value); // Validate while typing
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: validateField(name, value) }));
+    }
   };
 
-  const handleBlur = (e) => {
-    validateField(e.target.name, e.target.value); // Validate when field loses focus
+   const handleBlur = (e) => {
+    const { name, value } = e.target;
+    setErrors((prev) => ({ ...prev, [name]: validateField(name, value) }));
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!errors.email && !errors.password && creds.email && creds.password) {
+    
+    const emailError = validateField("email", creds.email);
+    const passwordError = validateField("password", creds.password);
+    
+    setErrors({ email: emailError, password: passwordError });
+
+    if (!emailError && !passwordError) {
       dispatch(signIn(creds.email, creds.password));
       setCreds({ email: "", password: "" });
     }
   };
+
 
   if (auth._id) return <Redirect to="/" />;
 
@@ -109,7 +119,7 @@ const SignIn = () => {
           color="primary"
           className={classes.spacing}
           type="submit"
-          disabled={!creds.email || !creds.password || errors.email || errors.password}
+          disabled={Boolean(errors.email) || Boolean(errors.password) || !creds.email || !creds.password}
         >
           SignIn
         </Button>
