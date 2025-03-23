@@ -42,7 +42,6 @@ const SignIn = () => {
   return (
     <>
       <form
-        noValidate
         autoComplete="off"
         className={classes.formStyle}
         onSubmit={handleSubmit}
