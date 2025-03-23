@@ -27,11 +27,43 @@ const SignIn = () => {
     email: "",
     password: "",
   });
+  const [errors, setErrors] = useState({ email: "", password: "" });
 
+  // Email validation regex
+  const validateEmail = (email) => {
+    return /\S+@\S+\.\S+/.test(email);
+  };
+  // Validation function
+  const validateField = (field, value) => {
+    let errorMsg = "";
+
+    if (field === "email") {
+      if (!value) errorMsg = "Email is required.";
+      else if (!validateEmail(value)) errorMsg = "Invalid email format.";
+    } 
+    else if (field === "password") {
+      if (!value) errorMsg = "Password is required.";
+      else if (value.length < 6) errorMsg = "Password must be at least 6 characters.";
+    }
+
+    setErrors((prevErrors) => ({ ...prevErrors, [field]: errorMsg }));
+  };
+  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCreds((prevCreds) => ({ ...prevCreds, [name]: value }));
+    validateField(name, value); // Validate while typing
+  };
+
+  const handleBlur = (e) => {
+    validateField(e.target.name, e.target.value); // Validate when field loses focus
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(signIn(creds.email, creds.password));
-    setCreds({ email: "", password: "" });
+    if (!errors.email && !errors.password && creds.email && creds.password) {
+      dispatch(signIn(creds.email, creds.password));
+      setCreds({ email: "", password: "" });
+    }
   };
 
   if (auth._id) return <Redirect to="/" />;
@@ -53,7 +85,11 @@ const SignIn = () => {
           type="email"
           fullWidth
           value={creds.email}
-          onChange={(e) => setCreds({ ...creds, email: e.target.value })}
+          error={Boolean(errors.email)}
+          helperText={errors.email}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          
         />
         <TextField
           className={classes.spacing}
@@ -63,13 +99,17 @@ const SignIn = () => {
           variant="outlined"
           fullWidth
           value={creds.password}
-          onChange={(e) => setCreds({ ...creds, password: e.target.value })}
+          error={Boolean(errors.password)}
+          helperText={errors.password}
+          onChange={handleChange}
+          onBlur={handleBlur}
         />
         <Button
           variant="contained"
           color="primary"
           className={classes.spacing}
           type="submit"
+          disabled={!creds.email || !creds.password || errors.email || errors.password}
         >
           SignIn
         </Button>
