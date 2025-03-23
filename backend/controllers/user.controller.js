@@ -57,10 +57,7 @@ exports.loginUser = async (req, res) => {
     const { error } = schema.validate(req.body);
 
     if (error)
-      return res.status(400).json({
-        status: 0,
-        message: error.details[0].message,
-      });
+      res.status(500).send(error.details[0].message);
 
     //check email
     let user = await User.findOne({ email: req.body.email });
