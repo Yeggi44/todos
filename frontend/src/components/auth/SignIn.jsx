@@ -50,6 +50,7 @@ const SignIn = () => {
           id="enter-email"
           label="Enter Email"
           variant="outlined"
+          type="email"
           fullWidth
           value={creds.email}
           onChange={(e) => setCreds({ ...creds, email: e.target.value })}
