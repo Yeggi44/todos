@@ -28,73 +28,13 @@ const SignIn = () => {
     password: "",
   });
   
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   dispatch(signIn(creds.email, creds.password));
-  //   setCreds({ email: "", password: "" });
-  // };
-
-  const [errors, setErrors] = useState({
-    email: "",
-    password: "",
-  });
-
-  // Validate email format
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  // Handle input changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCreds({
-      ...creds,
-      [name]: value,
-    });
-    
-    // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors({
-        ...errors,
-        [name]: "",
-      });
-    }
-  };
-
-  // Validate form before submission
-  const validateForm = () => {
-    let tempErrors = {};
-    let isValid = true;
-
-    if (!creds.email) {
-      tempErrors.email = "Email is required";
-      isValid = false;
-    } else if (!validateEmail(creds.email)) {
-      tempErrors.email = "Please enter a valid email address";
-      isValid = false;
-    }
-
-    if (!creds.password) {
-      tempErrors.password = "Password is required";
-      isValid = false;
-    } else if (creds.password.length < 6) {
-      tempErrors.password = "Password must be at least 6 characters";
-      isValid = false;
-    }
-
-    setErrors(tempErrors);
-    return isValid;
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    if (validateForm()) {
-      dispatch(signIn(creds.email, creds.password));
-      setCreds({ email: "", password: "" });
-    }
+    dispatch(signIn(creds.email, creds.password));
+    setCreds({ email: "", password: "" });
   };
+
+  
  
 
   if (auth._id) return <Redirect to="/" />;
@@ -116,9 +56,8 @@ const SignIn = () => {
           type="email"
           fullWidth
           value={creds.email}
-           onChange={handleChange}
-          error={Boolean(errors.email)}
-          helperText={errors.email}
+          onChange={(e) => setCreds({ ...creds, email: e.target.value })}
+
           
         />
         <TextField
@@ -129,9 +68,8 @@ const SignIn = () => {
           variant="outlined"
           fullWidth
           value={creds.password}
-          onChange={handleChange}
-          error={Boolean(errors.password)}
-          helperText={errors.password}
+          onChange={(e) => setCreds({ ...creds, password: e.target.value })}
+
         />
         <Button
           variant="contained"
