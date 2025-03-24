@@ -14,9 +14,9 @@ app.use(
 app.use(express.json());
 
 //routes
-app.use("/api/todos", todo);
-app.use("/api/signUp", signUp);
-app.use("/api/signIn", signIn);
+app.use("/api/tasks", todo);
+app.use("/api/register", signUp);
+app.use("/api/login", signIn);
 
 app.get("/", function (req, res) {
   res.send("Welcome!");
