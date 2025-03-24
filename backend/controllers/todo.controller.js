@@ -1,6 +1,7 @@
 const Joi = require("joi");
 const { Todo } = require("../model/todo");
 
+//create todo
 exports.createToDo = async (req, res) => {
   try {
     const schema = Joi.object({
@@ -33,6 +34,7 @@ exports.createToDo = async (req, res) => {
   }
 };
 
+//get todo
 exports.getAllToDo = async (req, res) => {
   try {
     const todos = await Todo.find().sort({ date: -1 });
@@ -46,6 +48,7 @@ exports.getAllToDo = async (req, res) => {
   }
 };
 
+//update todo
 exports.updateToDo = async (req, res) => {
   try {
     const schema = Joi.object({
@@ -84,6 +87,7 @@ exports.updateToDo = async (req, res) => {
   }
 };
 
+//delete todo
 exports.deleteToDo = async (req, res) => {
   try {
     const todo = await Todo.findById(req.params.id);
