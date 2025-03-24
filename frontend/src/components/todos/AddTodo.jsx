@@ -56,7 +56,7 @@ const AddTodo = ({ todo, setTodo }) => {
             <form noValidate autoComplete="off" className={classes.formStyle} onSubmit = { handleSubmit }>
                 <TextField
                     id="enter-todo"
-                    label="enterToDo"
+                    label="Enter your Task"
                     variant="outlined"
                     autoFocus
                     fullWidth
