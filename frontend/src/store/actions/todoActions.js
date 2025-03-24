@@ -23,7 +23,7 @@ export const addTodo = (newTodo) => {
     const author = getState().auth.name;
     const uid = getState().auth._id;
     axios
-      .post(`${url}/tasks{ ...newTodo, author, uid }, setHeaders())
+      .post(`${url}/tasks`,{ ...newTodo, author, uid }, setHeaders())
       .then((todo) => {
         dispatch({
           type: "ADD_TODO",
